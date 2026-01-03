@@ -25,7 +25,8 @@ export default function App() {
       <nav className="fixed top-0 w-full z-50 bg-slate-950/50 backdrop-blur-lg border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-tr from-cyan-400 to-fuchsia-600 rounded-lg animate-pulse" />
+           {/* THIS IS THE NEW IMG TAG */}
+<img src="/20260104-051248.jpg" alt="Nebula Studio Logo" className="w-8 h-8 object-contain" />
             <span className="text-xl font-bold tracking-wider">
               NEBULA STUDIO
             </span>
