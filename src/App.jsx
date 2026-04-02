@@ -64,7 +64,7 @@ export default function App() {
             </motion.h1>
 
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-              我们利用 AI 辅助编剧与虚幻引擎渲染，打造沉浸式赛博朋克短剧宇宙。
+              我们利用 AI 辅助编剧与 AI 视频模型创作，打造沉浸式赛博朋克短剧宇宙。
               Nebula Studio，为未来的屏幕而生。
             </motion.p>
 
