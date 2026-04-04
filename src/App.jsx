@@ -19,6 +19,8 @@ const staggerContainer = {
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  // 新增：控制“联系我们”弹窗的状态
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   // 1. 模拟开场加载过程 (2.5秒)
   useEffect(() => {
@@ -40,7 +42,6 @@ export default function App() {
             transition={{ duration: 0.8 }}
             className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-slate-950"
           >
-            {/* 核心发光圆环 */}
             <motion.div
               animate={{ 
                 rotate: 360,
@@ -73,7 +74,7 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* --- B. 网页主内容 (加载完后平滑显示) --- */}
+      {/* --- B. 网页主内容 --- */}
       <motion.main
         animate={{ opacity: isLoading ? 0 : 1 }}
         transition={{ duration: 1 }}
@@ -90,7 +91,11 @@ export default function App() {
               <a href="#tech-stack" className="hover:text-cyan-400">技术</a>
               <a href="#" className="hover:text-cyan-400">关于</a>
             </div>
-            <button className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full text-sm font-medium border border-white/5">
+            {/* 修改：点击按钮打开联系弹窗 */}
+            <button 
+              onClick={() => setIsContactOpen(true)}
+              className="bg-white/10 hover:bg-cyan-500/20 hover:text-cyan-400 px-4 py-2 rounded-full text-sm font-medium border border-white/5 transition-all"
+            >
               联系我们
             </button>
           </div>
@@ -116,7 +121,6 @@ export default function App() {
               </motion.p>
 
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-                {/* 酷炫设计的 开始探索按钮 */}
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -140,7 +144,6 @@ export default function App() {
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-bold mb-16">核心技术栈</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {/* 这里的卡片代码保持你原来的即可 */}
                <div className="bg-slate-900/50 p-8 rounded-3xl border border-white/5">竖屏电影感视效</div>
                <div className="bg-slate-900/50 p-8 rounded-3xl border border-white/5">AIGC 剧本辅助</div>
                <div className="bg-slate-900/50 p-8 rounded-3xl border border-white/5">全球化发行</div>
@@ -166,6 +169,56 @@ export default function App() {
               <video autoPlay controls playsInline className="w-full h-full object-contain">
                 <source src="/showreel.mp4" type="video/mp4" />
               </video>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* --- D. 新增：联系我们弹窗 (全息投影动画) --- */}
+      <AnimatePresence>
+        {isContactOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsContactOpen(false)}
+            className="fixed inset-0 z-[160] flex items-center justify-center p-6 bg-slate-950/80 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0, rotateX: 45 }}
+              animate={{ scale: 1, opacity: 1, rotateX: 0 }}
+              exit={{ scale: 0.8, opacity: 0, filter: "blur(10px)" }}
+              transition={{ type: "spring", damping: 20, stiffness: 100 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative bg-slate-900 border border-cyan-500/30 p-8 rounded-3xl shadow-[0_0_50px_rgba(6,182,212,0.2)] max-w-sm w-full text-center"
+            >
+              {/* 四角装饰 */}
+              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-cyan-400 rounded-tl-lg" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-cyan-400 rounded-br-lg" />
+
+              <h3 className="text-cyan-400 font-mono tracking-widest mb-6">CONTACT_NODE</h3>
+              
+              <div className="relative group overflow-hidden rounded-xl bg-black border border-white/10 mb-6">
+                <img 
+                  src="/contact-qr.jpg"  // 请确保 public 文件夹中有这张图
+                  alt="Contact QR" 
+                  className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500"
+                />
+                {/* 扫描线光效 */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent h-20 w-full animate-pulse pointer-events-none" />
+              </div>
+
+              <p className="text-slate-400 text-sm font-mono mb-6 text-left border-l-2 border-cyan-500 pl-3">
+                扫描二维码联系我们 <br />
+                <span className="text-white">Nebula Studio Team</span>
+              </p>
+
+              <button 
+                onClick={() => setIsContactOpen(false)}
+                className="w-full py-2 bg-white/5 hover:bg-white/10 text-xs text-slate-500 rounded-lg transition-colors font-mono"
+              >
+                CLOSE_CONNECTION [ESC]
+              </button>
             </motion.div>
           </motion.div>
         )}
