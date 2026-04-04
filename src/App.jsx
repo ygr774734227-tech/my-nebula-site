@@ -229,7 +229,7 @@ export default function App() {
               <FeatureCard 
                 icon={Globe} 
                 title="全球化发行" 
-                desc="覆盖北美、东南亚市场，支持多语种 AI 实时译制。" 
+                desc="支持多语种 AI 实时译制。" 
                 colorClass="text-emerald-400"
               />
             </div>
