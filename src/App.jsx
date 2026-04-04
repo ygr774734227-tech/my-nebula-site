@@ -216,8 +216,8 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <FeatureCard 
                 icon={Film} 
-                title="竖屏电影感视效" 
-                desc="专为移动端优化的 9:16 构图，引入电影级调色与光影。" 
+                title="横竖屏电影感视效" 
+                desc="无论是横屏还是竖屏，电影级调色与光影。" 
                 colorClass="text-cyan-400"
               />
               <FeatureCard 
